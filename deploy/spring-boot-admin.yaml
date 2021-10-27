@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: spring-boot-admin
+  name: spring-boot-admin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-boot-admin
+  template:
+    metadata:
+      labels:
+        app: spring-boot-admin
+    spec:
+      containers:
+        - image: wansir/spring-boot-admin:latest
+          imagePullPolicy: IfNotPresent
+          name: spring-boot-admin
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-boot-admin
+spec:
+  ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: spring-boot-admin
+  sessionAffinity: None
+  type: ClusterIP
+
+---
+apiVersion: v1
+data:
+  application.yml: |-
+    server:
+      port: ${SERVER_PORT:8000}
+    spring:
+      application:
+        name: spring-boot-admin
+      cloud:
+        kubernetes:
+          discovery:
+            all-namespaces: false
+            include-not-ready-addresses: false
+          config:
+            enabled: true
+kind: ConfigMap
+metadata:
+  name: spring-boot-admin

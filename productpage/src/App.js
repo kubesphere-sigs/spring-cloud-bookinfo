@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import 'jquery/src/jquery';
 import 'bootstrap/dist/css/bootstrap-theme.min.css';
@@ -154,7 +153,7 @@ export default class App extends Component {
           <nav className="navbar navbar-inverse navbar-static-top">
             <div className="container">
               <div className="navbar-header">
-                <a className="navbar-brand" href="#">BookInfo Sample</a>
+                <a className="navbar-brand" href="/">BookInfo Sample</a>
               </div>
             </div>
           </nav>

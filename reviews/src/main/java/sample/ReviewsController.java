@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1")
 public class ReviewsController {
 
-    @Value("${enableRatings}")
+    @Value("${ratings.enabled:false}")
     boolean enableRatings;
+
+    @Value("${ratings.color:black}")
+    String color;
 
     final ReviewsService reviewsService;
 
@@ -28,7 +31,9 @@ public class ReviewsController {
         List<Reviews> reviews = reviewsService.ListReviewsByProductID(id);
         if (enableRatings) {
             reviews.forEach(item -> {
-                item.setRating(ratingsService.getRatingsByReviewsID(item.getId()));
+                Rating rating = ratingsService.getRatingsByReviewsID(item.getId());
+                rating.setColor(color);
+                item.setRating(rating);
             });
         }
         return reviews;

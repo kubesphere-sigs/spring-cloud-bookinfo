@@ -1,5 +1,11 @@
 server:
-  port: ${SERVER_PORT:8001}
+  port: ${SERVER_PORT:8080}
 spring:
   application:
     name: details
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

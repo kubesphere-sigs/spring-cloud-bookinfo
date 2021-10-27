@@ -1,5 +1,5 @@
 server:
-  port: ${SERVER_PORT:8000}
+  port: ${SERVER_PORT:8080}
 spring:
   application:
     name: gateway
@@ -20,8 +20,6 @@ spring:
           predicates:
             - Path=/api/v1/products/*/reviews
             - Weight=reviews, 50
-
-
 
 management:
   endpoints:

@@ -1,3 +1,2 @@
 rootProject.name = 'spring-cloud-bookinfo'
-include 'gateway', 'details', 'reviews'
-
+include 'gateway', 'details', 'reviews', 'spring-boot-admin'

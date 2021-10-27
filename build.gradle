@@ -12,6 +12,7 @@ buildscript {
 ext {
     springCloudVersion = "2020.0.4"
     alibabaCloudVersion = "2020.0.RC1"
+    springCloudK8sVersion = '2.0.1'
 }
 
 allprojects {
@@ -40,13 +41,18 @@ subprojects {
 
     compileJava.dependsOn(processResources)
 
-//    springBoot {
-//        buildInfo()
-//    }
+    springBoot {
+        buildInfo()
+    }
+
+    bootJar {
+        archiveFileName.set('app.jar')
+    }
 
     dependencyManagement {
         imports {
             mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+            mavenBom "org.springframework.cloud:spring-cloud-kubernetes-dependencies:${springCloudK8sVersion}"
             mavenBom "com.alibaba.cloud:spring-cloud-alibaba-dependencies:${alibabaCloudVersion}"
             mavenBom SpringBootPlugin.BOM_COORDINATES
         }
@@ -57,6 +63,7 @@ subprojects {
         compileOnly "org.springframework.boot:spring-boot-configuration-processor"
         implementation "org.springframework.boot:spring-boot-starter-actuator"
         implementation "org.springframework.cloud:spring-cloud-starter"
+        implementation "org.springframework.cloud:spring-cloud-starter-kubernetes-fabric8-all"
         implementation fileTree(dir: 'libs', includes: ['*.jar'])
     }
 }

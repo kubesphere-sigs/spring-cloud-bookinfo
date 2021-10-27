@@ -11,7 +11,8 @@ import (
 func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/api/v1/reviews/{id:[0-9]+}/ratings", handler).Methods("GET")
-	log.Fatal(http.ListenAndServe(":8003", r))
+	log.Println("Server listen on 8080")
+	log.Fatal(http.ListenAndServe(":8080", r))
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -19,7 +20,6 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	var result *Rating
 	for _, rating := range RatingList {
 		if rating.ReviewID == reviewID {
-			rating.Color = defaultRatingColor
 			result = &rating
 			break
 		}
@@ -44,10 +44,7 @@ var RatingList = []Rating{
 	},
 }
 
-const defaultRatingColor = "black"
-
 type Rating struct {
 	ReviewID int    `json:"reviewID"`
 	Stars    int    `json:"stars"`
-	Color    string `json:"color"`
 }

@@ -1,7 +1,16 @@
 server:
-  port: ${SERVER_PORT:8005}
+  port: ${SERVER_PORT:8080}
 spring:
   application:
     name: reviews
 
-enableRatings: true
+ratings:
+  enabled: true
+  server-addr: http://ratings
+  color: red
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

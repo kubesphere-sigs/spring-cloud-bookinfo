@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: gateway
+  name: gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gateway
+  template:
+    metadata:
+      labels:
+        app: gateway
+    spec:
+      containers:
+        - image: wansir/gateway:latest
+          imagePullPolicy: IfNotPresent
+          name: gateway
+
+---
+apiVersion: v1
+data:
+  application.yml: |-
+    server:
+      port: ${SERVER_PORT:8080}
+    spring:
+      application:
+        name: gateway
+      cloud:
+        gateway:
+          routes: []
+    management:
+      endpoints:
+        web:
+          exposure:
+            include: "*"
+kind: ConfigMap
+metadata:
+  name: gateway
+
