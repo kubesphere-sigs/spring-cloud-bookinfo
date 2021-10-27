@@ -1,0 +1,30 @@
+server:
+  port: ${SERVER_PORT:8000}
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        - id: details
+          uri: http://localhost:8001
+          predicates:
+            - Path=/api/v1/products/*
+        - id: reviews-v1
+          uri: http://localhost:8002
+          predicates:
+            - Path=/api/v1/products/*/reviews
+            - Weight=reviews, 50
+        - id: reviews-v2
+          uri: http://localhost:8005
+          predicates:
+            - Path=/api/v1/products/*/reviews
+            - Weight=reviews, 50
+
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

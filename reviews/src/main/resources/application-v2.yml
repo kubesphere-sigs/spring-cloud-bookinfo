@@ -1,0 +1,7 @@
+server:
+  port: ${SERVER_PORT:8005}
+spring:
+  application:
+    name: reviews
+
+enableRatings: true

@@ -1,0 +1,3 @@
+rootProject.name = 'spring-cloud-bookinfo'
+include 'gateway', 'details', 'reviews'
+
