@@ -108,18 +108,20 @@ public class DynamicRouteController implements ApplicationEventPublisherAware,
     @Override
     public void run() {
         try (KubernetesClient client = new DefaultKubernetesClient()) {
-            SharedInformerFactory sharedInformerFactory = client.informers();
-            SharedIndexInformer<GatewayRouteConfig> informer = sharedInformerFactory
-                    .sharedIndexInformerFor(GatewayRouteConfig.class, 5 * 60 * 1000L);
+            SharedIndexInformer<GatewayRouteConfig> informer = client.
+                    resources(GatewayRouteConfig.class).
+                    inNamespace(namespace).
+                    inform(this,  120 * 1000L );
+
+//            SharedInformerFactory sharedInformerFactory = client.informers();
+//            SharedIndexInformer<GatewayRouteConfig> informer = sharedInformerFactory.inNamespace(namespace)
+//                    .sharedIndexInformerFor(GatewayRouteConfig.class, 5 * 60 * 1000L);
             logger.info("Informer factory initialized.");
 
             informer.addEventHandler(this);
 
-            sharedInformerFactory.addSharedInformerEventListener(ex ->
-                    logger.error("Exception occurred, but caught: {}", ex.getMessage()));
-
-            logger.info("Starting all registered informers");
-            sharedInformerFactory.startAllRegisteredInformers();
+            logger.info("Starting informer");
+            informer.run();
 
             while (!Thread.interrupted()) {
                 logger.info("GatewayRouteConfigInformer.hasSynced() : {}",
