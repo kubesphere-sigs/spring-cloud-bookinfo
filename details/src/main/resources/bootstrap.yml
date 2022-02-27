@@ -1,5 +1,0 @@
-spring.cloud.kubernetes.enabled: true
-
-spring:
-  application:
-    name: details

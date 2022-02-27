@@ -1,9 +1,10 @@
-FROM golang:1.16-alpine3.14 as builder
+FROM golang:1.16 as builder
 COPY / /app/builder
 WORKDIR /app/builder
-RUN CGO_ENABLED=0 go build -trimpath -o app .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -o app main.go
 
-FROM alpine:3.14.2
-COPY --from=builder /app/builder/app /app/
-WORKDIR /app
-CMD ["app"]
+FROM gcr.io/distroless/static:nonroot
+WORKDIR /
+COPY --from=builder app/builder/app .
+USER 65532:65532
+ENTRYPOINT ["/app"]

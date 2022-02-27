@@ -4,7 +4,8 @@ spring:
   application:
     name: spring-boot-admin
   cloud:
-    kubernetes:
+    consul:
+      host: consul-application-consul-server.consul-demo.svc # 填对应 consul 地址
+      port: 8500 # consul 默认端口
       discovery:
-        all-namespaces: false
-        include-not-ready-addresses: false
+        prefer-ip-address: true # springcloud 中使用 consul 注册服务时默认使用的 hostname ，需要换成IP
