@@ -3,10 +3,17 @@ server:
 spring:
   application:
     name: reviews
+  cloud:
+    consul:
+      host: consul-application-consul-server.consul-demo.svc # 填对应 consul 地址
+      port: 8500 # consul 默认端口
+      discovery:
+        prefer-ip-address: true # springcloud 中使用 consul 注册服务时默认使用的 hostname ，需要换成IP
+
 
 ratings:
   enabled: true
-  server-addr: http://ratings
+  server-addr: http://ratings-consul-demo # 填 consul 中对应的服务名称
   color: red
 
 management:
