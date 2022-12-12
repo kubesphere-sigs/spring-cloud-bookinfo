@@ -1,6 +1,6 @@
 ### Gradle template
 .gradle
-**/build/
+# **/build/
 !src/**/build/
 
 # Ignore Gradle GUI config
@@ -102,7 +102,7 @@ fabric.properties
 .mtj.tmp/
 
 # Package Files #
-*.jar
+# *.jar
 *.war
 *.nar
 *.ear
@@ -114,4 +114,3 @@ fabric.properties
 hs_err_pid*
 
 productpage
-ratings

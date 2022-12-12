@@ -8,15 +8,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class ReviewsService {
 
-    private static List<Reviews> reviews = Arrays.asList(
-            new Reviews(1, 1, "Reviewer1",
+    private static List<Review> reviews = Arrays.asList(
+            new Review(1, 1, "Reviewer1",
                     "An extremely entertaining play by Shakespeare. The slapstick humour is refreshing!"),
-            new Reviews(2, 1, "Reviewer2",
+            new Review(2, 1, "Reviewer2",
                     "Absolutely fun and entertaining. The play lacks thematic depth when compared to other plays by Shakespeare."));
 
-    public List<Reviews> ListReviewsByProductID(int productID) {
+    public List<Review> listReviewsByProductId(int productId) {
         return reviews.stream()
-                .filter(reviews -> reviews.getProductID() == productID)
+                .filter(review -> review.getProductId() == productId)
                 .collect(Collectors.toList());
     }
 

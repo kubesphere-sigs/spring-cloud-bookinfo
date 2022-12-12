@@ -8,15 +8,10 @@ public class Rating implements Serializable {
 
     private int reviewId;
     private int stars;
-    private String color;
 
-    public Rating() {
-    }
-
-    public Rating(int reviewId, int stars, String color) {
+    public Rating(int reviewId, int stars) {
         this.reviewId = reviewId;
         this.stars = stars;
-        this.color = color;
     }
 
     public int getReviewId() {
@@ -33,13 +28,5 @@ public class Rating implements Serializable {
 
     public void setStars(int stars) {
         this.stars = stars;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 }

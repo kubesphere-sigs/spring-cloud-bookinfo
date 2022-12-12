@@ -9,13 +9,13 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1")
-public class DetailsController {
+public class RatingsController {
 
     @Resource
-    DetailsService service;
+    RatingsService ratingsService;
 
-    @RequestMapping("/products/{id}")
-    public Optional<Detail> getDetail(@PathVariable final int id) {
-        return service.getDetailById(id);
+    @RequestMapping("/reviews/{id}/ratings")
+    public Rating getRatings(@PathVariable("id") int reviewId) {
+        return ratingsService.getRating(reviewId);
     }
 }

@@ -9,7 +9,7 @@
 #      config:
 #        server-addr: xxx
 #        namespace: xxx
-#        name: details.yaml
+#        name: reviews.yaml
 #        file-extension: yaml
 
 #management:
