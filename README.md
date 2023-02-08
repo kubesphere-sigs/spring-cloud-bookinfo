@@ -105,7 +105,7 @@ management.endpoints.web.exposure.include=*
 
 1. ##### 创建工作负载并通过环境变量指定网关地址
 
-   填写镜像：若没有构建镜像可以用 `kubesphere/springcloud-bookinfo-productpage-v1:latest` demo ， 那么这儿我们也就填写对应的镜像地址。
+   填写镜像：若没有构建镜像可以用 `kubesphere/springcloud-bookinfo-productpage-v1:v0.1.0` demo ， 那么这儿我们也就填写对应的镜像地址。
 
    设置环境变量：（API_SERVER : http://springcloud-gateway.springcloud-demo.svc:8080）
 
@@ -166,7 +166,7 @@ details 提供了具体的书籍详情 API，我们可以通过 product id 获�
    配置规则可参照 springcloud-gateway ，这儿主要配置以下几项：
 
    ```yaml
-           - id: details-
+           - id: details-v1
              uri: lb://details-v1
              predicates:
                - Path=/api/v1/products/*
