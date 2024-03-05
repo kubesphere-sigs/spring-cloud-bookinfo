@@ -1,4 +1,4 @@
-# Copyright Istio Authors
+# Copyright KubeSphere Authors
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -90,7 +90,7 @@ spec:
     spec:
       containers:
       - name: details
-        image: kubespheredev/springcloud-bookinfo-details-v1:v0.1.0
+        image: kubesphere/springcloud-bookinfo-details-v1:v0.1.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
@@ -153,7 +153,7 @@ spec:
     spec:
       containers:
       - name: ratings
-        image: kubespheredev/springcloud-bookinfo-ratings-v1:v0.1.0
+        image: kubesphere/springcloud-bookinfo-ratings-v1:v0.1.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
@@ -197,7 +197,7 @@ spec:
     spec:
       containers:
       - name: reviews
-        image: kubespheredev/springcloud-bookinfo-reviews-v1:v0.1.0
+        image: kubesphere/springcloud-bookinfo-reviews-v1:v0.1.0
         imagePullPolicy: IfNotPresent
         env:
         - name: LOG_DIR
@@ -237,7 +237,7 @@ spec:
     spec:
       containers:
       - name: reviews
-        image: kubespheredev/springcloud-bookinfo-reviews-v2:v0.1.0
+        image: kubesphere/springcloud-bookinfo-reviews-v2:v0.1.0
         imagePullPolicy: IfNotPresent
         env:
         - name: LOG_DIR
@@ -277,7 +277,7 @@ spec:
     spec:
       containers:
       - name: reviews
-        image: kubespheredev/springcloud-bookinfo-reviews-v3:v0.1.0
+        image: kubesphere/springcloud-bookinfo-reviews-v3:v0.1.0
         imagePullPolicy: IfNotPresent
         env:
         - name: LOG_DIR
@@ -360,7 +360,7 @@ spec:
     spec:
       containers:
       - name: productpage
-        image: kubespheredev/springcloud-bookinfo-productpage-v1:v0.1.0
+        image: kubesphere/springcloud-bookinfo-productpage-v1:v0.1.0
         imagePullPolicy: IfNotPresent
         env:
           - name: NAMESPACE

@@ -107,9 +107,9 @@ management.endpoints.web.exposure.include=*
 
    填写镜像：若没有构建镜像可以用 `kubesphere/springcloud-bookinfo-productpage-v1:v0.1.0` demo ， 那么这儿我们也就填写对应的镜像地址。
 
-   设置环境变量：（API_SERVER : http://springcloud-gateway.springcloud-demo.svc:8080）
+   设置环境变量：（API_SERVER : http://springcloud-gateway.springcloud-demo.svc:8080）设置 spring cloud gateway 服务的访问地址，需根据各自环境中的情况设定。
 
-   因为在前端项目中通过反向代理 访问 API 网关，通过环境变量配置 API 网关地址。网关我们下一步再部署，网关名字我们就设为 gateway、端口设为8080，那么这儿访问网关的地址就是  http://springcloud-gateway.springcloud-demo.svc:8080 。
+   因为在前端项目中通过反向代理 访问 API 网关，通过环境变量配置 API 网关地址。网关我们下一步再部署，当前命名空间为 springcloud-demo、网关名字我们就设为 gateway、端口设为8080，那么这儿访问网关的地址就是  http://springcloud-gateway.springcloud-demo.svc:8080 。
 
    ![image-20221207152814720](docs/images/image-20221207152814720.png)
 
@@ -153,7 +153,7 @@ details 提供了具体的书籍详情 API，我们可以通过 product id 获�
 
    命名为：details-v1。（**注意：在创建实例命名微服务时，名字中不要出现下划线，否则会出现找不该服务的问题。**）
 
-   填写镜像：若没有构建镜像可以用 `kubesphere/springcloud-bookinfo-datails-v1:v0.1.0` demo， 那么这儿我们也就填写对应的镜像地址。
+   填写镜像：若没有构建镜像可以用 `kubesphere/springcloud-bookinfo-details-v1:v0.1.0` demo， 那么这儿我们也就填写对应的镜像地址。
 
    端口设置：设置8080端口
 
@@ -220,10 +220,34 @@ reviews 应用提供书籍评论相关的 API，可以通过配置开启是否�
 ![image-20220325114454233](docs/images/image-20220325114454233.png)
 
 
+#### 五、ratings-v1
 
-#### 五、reviews-v2
+ratings 应用提供评分相关的 API，reviews-v2 和 reviews-v3 会调用它，若需部署 reviews-v2 和 reviews-v3 验证灰度发布等就需要部署它。这个是springcloud微服务，需要在【 Spring Cloud 微服务中部署】
 
-reviews-v2 用于演示灰度发布，相关 API 和 reviews-v1 一样，只是默认展示书籍评分。这个是springcloud微服务，需要在【 Spring Cloud 微服务中部署】
+1. ##### 创建实例
+
+   命名为：ratings-v1
+
+   填写镜像：用 `kubesphere/springcloud-bookinfo-ratings-v1:v0.1.0` demo， 那么这儿我们也就填写对应的镜像地址。
+
+   端口设置：设置8080端口
+
+   
+
+4. ##### 在微服务网关中配置服务路由
+
+   配置规则可参照 springcloud-gateway ，这儿主要配置以下几项：
+
+```
+        - id: ratings-v1
+          uri: lb://ratings-v1
+          predicates:
+            - Path=/api/v1/reviews/*/ratings
+```
+
+#### 六、reviews-v2
+
+reviews-v2 用于演示灰度发布，相关 API 和 reviews-v1 一样，只是它会调用 ratings 中的 API 获取书籍评分，展示书籍评论和评分。这个是springcloud微服务，需要在【 Spring Cloud 微服务中部署】
 
 1. ##### 创建实例
 
